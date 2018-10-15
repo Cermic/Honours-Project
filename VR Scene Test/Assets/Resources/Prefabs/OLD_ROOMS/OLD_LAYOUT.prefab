@@ -4029,7 +4029,7 @@ GameObject:
   - component: {fileID: 4375398798613168}
   - component: {fileID: 114689543467698822}
   m_Layer: 0
-  m_Name: OLD LAYOUT
+  m_Name: OLD_LAYOUT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
