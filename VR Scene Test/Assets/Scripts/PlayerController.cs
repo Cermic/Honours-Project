@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 			playerMovement += new Vector3(0, 1, 0);
 
 		// Down
-		if (Input.GetKey(KeyCode.LeftControl))
+		if (Input.GetKey(KeyCode.C))
 			playerMovement += new Vector3(0, -1, 0);
 
 		return playerMovement;
