@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class RoomSetup : MonoBehaviour {
 
-    // These define the number of rooms attached to each room and how many layers deep the maze will go.
+    // Defines the number of rooms attached to each room and how many layers deep the maze will go.
 	private const int ROOMS_PER_BRANCH = 2;
     private const int MAZE_DEPTH = 4;
+    // Material for the light sphere
 	private Material emmisive_white;
+    // Array of Room objects
     private Room[] roomSet;
-	private GameObject[] rooms;
     private GameObject lightSphereGameObj;
 	private Light lightLeft, lightRight;
+    // Light config enum that can be changed in editor
 	public enum LightConfiguration
 	{ONE, TWO, THREE, FOUR, FIVE, SIX}
 	public LightConfiguration lightconfig;
-    // Vectors to add to the coords of the first level of rooms.
+    // Bool to be used to turn on and off the experiment state
+    public bool isControl = false;
+    // Coords and angle for the First Room.
     private Vector3 firstRoomCoords;
     private Quaternion firstRoomAngle;
+    // left and right offsets for the first level of child rooms.
     private Vector3 initialLeftOffset, initialRightOffset;
-    // Vectors to add to the coordinates of all other levels.
+    // left and right offsets for all sub child rooms
     private Vector3 leftOffset, rightOffset;
+    // Standard room scale
     private Vector3 roomScale; 
     private Object firstRoomObject, roomObject;
+    // Left and right rotation values
     private Quaternion leftRotation, rightRotation;
 
 	/*
@@ -37,81 +44,34 @@ public class RoomSetup : MonoBehaviour {
 	void Start () {
         // Load material for the light sphere
 		emmisive_white = Resources.Load ("Materials/Emmisive_White") as Material;
+        // Load room objects
         firstRoomObject = Resources.Load("Prefabs/FirstRoom");
         roomObject = Resources.Load("Prefabs/Room");
+        // Load sphere primitive to represent a light
         lightSphereGameObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
         firstRoomCoords = new Vector3(0, 20, 0);
         firstRoomAngle = Quaternion.Euler(-90, 0, 0);
-        initialRightOffset = new Vector3(-1.8f, 2.05f, 0.33f);
         initialLeftOffset = new Vector3(1.8f, 2.05f, -0.33f);
-        rightOffset = new Vector3(-0.85f, 1.5f, 0f);
+        initialRightOffset = new Vector3(-1.8f, 2.05f, 0.33f);
         leftOffset = new Vector3(0.85f, 1.5f, 0f);
+        rightOffset = new Vector3(-0.85f, 1.5f, 0f);
+        // Standard room scale - this is used to scale down the rooms as they adopt the scale of their parent (far too big)
         roomScale = new Vector3(1f, 1f, 1f);
         leftRotation = Quaternion.Euler(0, 0, -60);
         rightRotation = Quaternion.Euler(0, 0, 60);
-        // Populate room array
-        int mazeSize = (int)Mathf.Pow(ROOMS_PER_BRANCH, MAZE_DEPTH) - 1;
-        rooms = new GameObject[mazeSize];
-        roomSet = new Room[mazeSize];
 
-        //// Tags each room with the Left or Right tag as if it were in a binary tree.
-        //for (int j = 0; j < rooms.Length; j++)
-        //{
-        //    if (j == 0)
-        //    {
-        //        if (rooms[j] == null)
-        //        {
-        //            rooms[j] = Instantiate(firstRoomObject, new Vector3(0, 20, 0), Quaternion.Euler(-90, 0, 0)) as GameObject;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // Finds the parent index of the room based on it's position in the array and number of branching rooms.
-        //        float indexFloat = j;
-        //        int parentRoomIndex = Mathf.CeilToInt(indexFloat /= ROOMS_PER_BRANCH) - 1;
-        //        if (j == 1) // First room on the right
-        //        {
-        //            rooms[j] = Instantiate(roomObject, rooms[parentRoomIndex].transform) as GameObject;
-        //            rooms[j].transform.localScale = roomScale;
-        //            rooms[j].transform.localPosition = initialRightOffset;
-        //            rooms[j].transform.localRotation = rightRotation;
-        //        }
-        //        else if (j == 2) // First room on the left
-        //        {
-        //            // Room instantiated with prefab
-        //            rooms[j] = Instantiate(roomObject, rooms[parentRoomIndex].transform) as GameObject;
-        //            rooms[j].transform.localScale = roomScale;
-        //            rooms[j].transform.localPosition = initialLeftOffset;
-        //            rooms[j].transform.localRotation = leftRotation;
-        //        }
-        //        else
-        //        {
-        //            if (j % 2 == 0) // If the index is even, the room is on the left
-        //            {
-        //                rooms[j] = Instantiate(roomObject, rooms[parentRoomIndex].transform) as GameObject;
-        //                rooms[j].transform.localScale = roomScale;
-        //                rooms[j].transform.localPosition = leftOffset;
-        //                rooms[j].transform.localRotation = leftRotation;
-        //            }
-        //            else // If the index is odd, the room is on the right
-        //            {
-        //                rooms[j] = Instantiate(roomObject, rooms[parentRoomIndex].transform) as GameObject;
-        //                rooms[j].transform.localScale = roomScale;
-        //                rooms[j].transform.localPosition = rightOffset;
-        //                rooms[j].transform.localRotation = rightRotation;
-        //            }
-        //        }
-        //    }
-        //    rooms[j].name = "Room" + j.ToString();
-        //}
+        // Populate room array - This is done using the ROOMS_PER_BRANCH value to the power of MAZE_DEPTH -1. 
+        // This ensures the maze is always the appropriate size.
+        int mazeSize = (int)Mathf.Pow(ROOMS_PER_BRANCH, MAZE_DEPTH) - 1;
+        roomSet = new Room[mazeSize];
 
         // Tags each room with the Left or Right tag as if it were in a binary tree.
         for (int j = 0; j < roomSet.Length; j++)
         {
             if (j == 0)
             {
-                if (roomSet[j] == null)
+                if (roomSet[j] == null) // If the first room is null construct it.
                 {
                     roomSet[j] = new Room(firstRoomObject, lightSphereGameObj, lightSphereGameObj, lightLeft, lightRight, firstRoomCoords, firstRoomAngle);
                 }
@@ -131,6 +91,7 @@ public class RoomSetup : MonoBehaviour {
                 }
                 else
                 {
+                    // Child rooms of the first two ---
                     if (j % 2 == 0) // If the index is even, the room is on the left
                     {
                         roomSet[j] = new Room(roomObject, lightSphereGameObj, lightSphereGameObj, lightLeft, lightRight, leftOffset, leftRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
@@ -141,6 +102,7 @@ public class RoomSetup : MonoBehaviour {
                     }
                 }
             }
+            // Give the room the name room + it's array index.
             roomSet[j].gameObj.name = "Room" + j.ToString();
         }
 
