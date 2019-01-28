@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+//using LightConfiguration;
 
 public class RoomSetup : MonoBehaviour {
 
     // Defines the number of rooms attached to each room and how many layers deep the maze will go.
-	private const int ROOMS_PER_BRANCH = 2;
+    private const int ROOMS_PER_BRANCH = 2;
     private const int MAZE_DEPTH = 4;
+    private int lightConfigs = 0;
     // Material for the light sphere
-	private Material emmisive_white;
+    private Material emmisive_white;
     // Array of Room objects
     private Room[] roomSet;
-    private GameObject lightSphereGameObj;
-	private Light lightLeft, lightRight;
     // Light config enum that can be changed in editor
-	public enum LightConfiguration
-	{ONE, TWO, THREE, FOUR, FIVE, SIX}
-	public LightConfiguration lightconfig;
+    public enum LightConfiguration
+    { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT }
+
+    public LightConfiguration lightconfig;
+
     // Bool to be used to turn on and off the experiment state
     public bool isControl = false;
     // Coords and angle for the First Room.
@@ -27,33 +30,57 @@ public class RoomSetup : MonoBehaviour {
     // left and right offsets for all sub child rooms
     private Vector3 leftOffset, rightOffset;
     // Standard room scale
-    private Vector3 roomScale; 
+    private Vector3 roomScale;
     private Object firstRoomObject, roomObject;
     // Left and right rotation values
     private Quaternion leftRotation, rightRotation;
+    private Vector3 lightLeftOffset;
+    private Vector3 lightRightOffset;
 
-	/*
-	Use text file to store light configuration values and then a series of configs eg.
-	
-	C1 0.5, 0.5 C2 1.0, 0.5 etc
-	then for the config order
-	C1, C3, C4, C2
-	
-	This allows the config file to be edited after the program is compiled.
-	*/
-	void Start () {
+    private List<float> colourValues;
+    private List<int> chainValues;
+    private int[] roomCombination;
+    private List<Vector3> colourValues2;
+    private Vector3 firstRoomColour;
+    private int endIndex;
+    private int startIndex;
+    //public struct LightProperties
+    //{
+    //    // left and right offsets for the first room's lights of child rooms.
+    //    public Vector3 lightLeftOffset;
+    //    public Vector3 lightRightOffset;
+    //}
+
+    //public struct RoomProperties
+    //{
+    //    // Coords and angle for the First Room.
+    //    public Vector3 firstRoomCoords;
+    //    public Quaternion firstRoomAngle;
+    //    // left and right offsets for the first level of child rooms.
+    //    public Vector3 initialLeftOffset, initialRightOffset;
+    //    // left and right offsets for all sub child rooms
+    //    public Vector3 leftOffset, rightOffset;
+    //    // Standard room scale
+    //    public Vector3 roomScale;
+    //    public Object firstRoomObject, roomObject;
+    //    // Left and right rotation values
+    //    public Quaternion leftRotation, rightRotation;
+    //}
+
+    void Start()
+    {
         // Load material for the light sphere
-		emmisive_white = Resources.Load ("Materials/Emmisive_White") as Material;
+        emmisive_white = Resources.Load("Materials/Emmisive_White") as Material;
         // Load room objects
         firstRoomObject = Resources.Load("Prefabs/FirstRoom");
         roomObject = Resources.Load("Prefabs/Room");
         // Load sphere primitive to represent a light
-        lightSphereGameObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-
         firstRoomCoords = new Vector3(0, 20, 0);
         firstRoomAngle = Quaternion.Euler(-90, 0, 0);
         initialLeftOffset = new Vector3(1.8f, 2.05f, -0.33f);
         initialRightOffset = new Vector3(-1.8f, 2.05f, 0.33f);
+        lightLeftOffset = new Vector3(0.36f, 1.2f, 0.26f);
+        lightRightOffset = new Vector3(-0.36f, 1.2f, 0.26f);
         leftOffset = new Vector3(0.85f, 1.5f, 0f);
         rightOffset = new Vector3(-0.85f, 1.5f, 0f);
         // Standard room scale - this is used to scale down the rooms as they adopt the scale of their parent (far too big)
@@ -66,14 +93,55 @@ public class RoomSetup : MonoBehaviour {
         int mazeSize = (int)Mathf.Pow(ROOMS_PER_BRANCH, MAZE_DEPTH) - 1;
         roomSet = new Room[mazeSize];
 
-        // Tags each room with the Left or Right tag as if it were in a binary tree.
+        // Read in colour values from config file
+        colourValues = new List<float>();
+        chainValues = new List<int>();
+        string configText = File.ReadAllText("LightConfig.txt");
+        colourValues = ReadConfig(configText, colourValues);
+        // Sets the number of configurations based on the amount read from external file.
+        lightConfigs = LightConfigs(colourValues);
+        // A collection of all possible Light Configurations
+        LightConfig[] lc = new LightConfig[lightConfigs];
+
+        string currentConfigs = File.ReadAllText("LightConfigChains.txt");
+        // Array of Light Configurations for the current maze to be built
+        LightConfig[] mazeConfig = new LightConfig[MAZE_DEPTH - 1];
+        roomCombination = new int[MAZE_DEPTH - 1];
+
+        ReadConfigChain(currentConfigs, chainValues);
+
+        // Process all configs and setup an array of LightConfigs.
+        ProcessConfig(colourValues, lc);
+        // Set colours of the first room lights
+        SetupLights(lightconfig);
+        LightConfig[] roomArray = new LightConfig[roomSet.Length];
+        // Picks out the correct light configuration for each level of the maze.
+        startIndex = 1;
+        endIndex = 1;
+        for (int i = 0; i < MAZE_DEPTH - 1; i++)
+        {
+            if (i == 0)
+            {
+                roomArray[0] = lc[roomCombination[0] - 1]; // First room config
+            }
+            else
+            {
+                startIndex = (int)Mathf.Pow(ROOMS_PER_BRANCH, i); // Defines the index to start inserting the roomCombination at
+                endIndex = (int)Mathf.Pow(ROOMS_PER_BRANCH, i + 1); //  Defines the index to stop inserting the roomCombination at
+                for (int j = startIndex - 1; j < endIndex - 1; j++)
+                {
+                    roomArray[j] = lc[roomCombination[i] - 1]; // All other levels.
+                }
+            }
+        }
+        // Constructs each room in a tree structure
         for (int j = 0; j < roomSet.Length; j++)
         {
             if (j == 0)
             {
                 if (roomSet[j] == null) // If the first room is null construct it.
                 {
-                    roomSet[j] = new Room(firstRoomObject, lightSphereGameObj, lightSphereGameObj, lightLeft, lightRight, firstRoomCoords, firstRoomAngle);
+                    roomSet[j] = new Room(firstRoomObject, emmisive_white, roomArray[j], lightLeftOffset, lightRightOffset, firstRoomCoords, firstRoomAngle, Vector3.zero, null);
                 }
             }
             else
@@ -83,50 +151,106 @@ public class RoomSetup : MonoBehaviour {
                 int parentRoomIndex = Mathf.CeilToInt(indexFloat /= ROOMS_PER_BRANCH) - 1;
                 if (j == 1) // First room on the right
                 {
-                    roomSet[j] = new Room(roomObject, lightSphereGameObj, lightSphereGameObj, lightLeft, lightRight, initialRightOffset, rightRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
+                    roomSet[j] = new Room(roomObject, emmisive_white, roomArray[j], lightLeftOffset, lightRightOffset, initialRightOffset, rightRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
                 }
                 else if (j == 2) // First room on the left
                 {
-                    roomSet[j] = new Room(roomObject, lightSphereGameObj, lightSphereGameObj, lightLeft, lightRight, initialLeftOffset, leftRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
+                    roomSet[j] = new Room(roomObject, emmisive_white, roomArray[j], lightLeftOffset, lightRightOffset, initialLeftOffset, leftRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
                 }
                 else
                 {
                     // Child rooms of the first two ---
                     if (j % 2 == 0) // If the index is even, the room is on the left
                     {
-                        roomSet[j] = new Room(roomObject, lightSphereGameObj, lightSphereGameObj, lightLeft, lightRight, leftOffset, leftRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
+                        roomSet[j] = new Room(roomObject, emmisive_white, roomArray[j], lightLeftOffset, lightRightOffset, leftOffset, leftRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
                     }
                     else // If the index is odd, the room is on the right
                     {
-                        roomSet[j] = new Room(roomObject, lightSphereGameObj, lightSphereGameObj, lightLeft, lightRight, rightOffset, rightRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
+                        roomSet[j] = new Room(roomObject, emmisive_white, roomArray[j], lightLeftOffset, lightRightOffset, rightOffset, rightRotation, roomScale, roomSet[parentRoomIndex].gameObj.transform);
                     }
                 }
             }
             // Give the room the name room + it's array index.
             roomSet[j].gameObj.name = "Room" + j.ToString();
         }
+    }
+    // Reads the Config file that governs light configurations
+    List<float> ReadConfig(string configText, List<float> colourValues)
+    {
+        char[] seperators = {'C', 'I', ',', '<','>', '|'};		
+        string[] strValues = configText.Split(seperators);
+		int i=0;
+		
+        foreach (string str in strValues)
+        {			
+            float value = 0.0f;
+            if (float.TryParse(str, out value))
+            {
+                colourValues.Add(value);
+             }
+            i++;
+        }
+        return colourValues;
+    }
+    // Reads the Config file that governs light configurations
+    List<int> ReadConfigChain(string configText, List<int> configChain)
+    {
+        char[] seperators = {'C'};
+        string[] strValues = configText.Split(seperators);
 
-        // Setup Light 1
-        //lightSphere1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //lightSphere1.GetComponent<Renderer> ().material = emmisive_white;
-        //lightSphere1.transform.parent = room1.transform;
-        //lightSphere1.name = "Light1";
-        //light1 = lightSphere1.AddComponent<Light> ();
-
-        //// Setup Light 2
-        //lightSphere2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //lightSphere2.GetComponent<Renderer> ().material = emmisive_white;
-        //lightSphere2.transform.parent = room1.transform;
-        //lightSphere2.name = "Light2";
-        //light2 = lightSphere2.AddComponent<Light> ();
-
-        //light1.color = Color.blue;
-        //lightSphere1.transform.localPosition = new Vector3 (0, 10, 0);
-        //lightSphere2.transform.localPosition = new Vector3 (0, 0, 0);
+        foreach (string str in strValues)
+        {
+            int value = 0;
+            if (int.TryParse(str, out value))
+            {
+                configChain.Add(value);
+            }
+        }
+        return configChain;
+    }
+    int LightConfigs(List<float> colourValues)
+    {
+        return colourValues.Count / 8;
+    }
+    void ProcessConfig(List<float> colourValues, LightConfig[] lc)
+    {
+        int offset = lc.Length;
+        for (int i = 0; i < lc.Length; i++)
+        {
+            // Left Light rgb values
+                lc[i].leftLightColour.x = colourValues[i * offset];
+                lc[i].leftLightColour.y = colourValues[i * offset + 1];
+                lc[i].leftLightColour.z = colourValues[i * offset + 2];
+            // Right light rgb values
+                lc[i].rightLightColour.x = colourValues[i * offset + 3];
+                lc[i].rightLightColour.y = colourValues[i * offset + 4];
+                lc[i].rightLightColour.z = colourValues[i * offset + 5];
+            // Left light intensity
+                lc[i].leftLightIntensity = colourValues[i * offset + 6];
+            // Right light intensity
+                lc[i].rightLightIntensity = colourValues[i * offset + 7];
+        }
+        
     }
 
     void SetupLights(LightConfiguration lightconfig)
-	{
-		
-	}
+    {
+        int offset = 3;
+        if (lightconfig == LightConfiguration.ONE)
+        {
+            for (int i = 0; i < 3; i++)
+            { roomCombination[i] = chainValues[i]; }
+
+        }
+        if (lightconfig == LightConfiguration.TWO)
+        {
+            for (int i = 0; i < 3; i++)
+            { roomCombination[i] = chainValues[i + offset]; }
+        }
+        if (lightconfig == LightConfiguration.THREE)
+        {
+            for (int i = 0; i < 3; i++)
+            { roomCombination[i] = chainValues[i + (offset * 2)]; }
+        }
+    }
 }

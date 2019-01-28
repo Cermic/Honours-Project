@@ -998,6 +998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightconfig: 0
+  isControl: 0
 --- !u!4 &1264467341
 Transform:
   m_ObjectHideFlags: 0
