@@ -93,6 +93,7 @@ public class RoomSetup : MonoBehaviour {
         // Set colours of the first room lights
         SetupLights(lightconfig);
         LightConfig[] roomArray = new LightConfig[roomSet.Length];
+
         // Picks out the correct light configuration for each level of the maze.
         startIndex = 1;
         endIndex = 1;

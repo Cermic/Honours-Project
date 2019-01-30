@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37d7282f58fbc34cb54cbad124f9ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightconfig: 0
+  lightconfig: 11
   isControl: 0
 --- !u!4 &1264467341
 Transform:
