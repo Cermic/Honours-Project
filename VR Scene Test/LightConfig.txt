@@ -10,16 +10,16 @@
 |High vs Low Brightness - Uniform Colour|
 #4<C1.0,1.0,1.0 C1.0,1.0,1.0 I1.0 I0.5>
 
-|Red Low Intesity vs Blue High Brightness|
+|Red Low Brightness vs Blue High Brightness|
 #5<C1.0,0.0,0.0 C0.0,0.0,1.0 I0.5 I1.0>
 
-|Red High Intesity vs Blue Low Brightness|
+|Red High Brightness vs Blue Low Brightness|
 #6<C1.0,0.0,0.0 C0.0,0.0,1.0 I1.0 I0.5>
 
-|Blue Low Intesity vs Red High Brightness|
+|Blue Low Brightness vs Red High Brightness|
 #7<C0.0,0.0,1.0 C1.0,0.0,0.0 I0.5 I1.0>
 
-|Blue High Intesity vs Red Low Brightness|
+|Blue High Brightness vs Red Low Brightness|
 #8<C0.0,0.0,1.0 C1.0,0.0,0.0 I1.0 I0.5>
 
 C = Colour Value
