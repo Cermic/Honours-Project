@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Room : MonoBehaviour
 {
     public GameObject gameObj;
@@ -26,7 +25,8 @@ public class Room : MonoBehaviour
             gameObj.transform.localRotation = rp.orientation;
             gameObj.transform.localScale = rp.scale;
         }
-
+        // Give the gameObj the Room tag.
+        gameObj.tag = "Room";
         leftSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         leftSphere.GetComponent<Renderer>().material = lp.lightMat;
         rightSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);

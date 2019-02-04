@@ -46,10 +46,10 @@ public class RoomSetup : MonoBehaviour {
         firstRoomObject = Resources.Load("Prefabs/FirstRoom");
         roomObject = Resources.Load("Prefabs/Room");
         // Load sphere primitive to represent a light
-        firstRoomCoords = new Vector3(0, 20, 0);
+        firstRoomCoords = new Vector3(0, 0, 0);
         firstRoomOrientation = Quaternion.Euler(-90, 0, 0);
-        initialLeftOffset = new Vector3(1.8f, 2.05f, -0.33f);
-        initialRightOffset = new Vector3(-1.8f, 2.05f, 0.33f);
+        initialLeftOffset = new Vector3(1.9f, 2.095f, -0.35f);
+        initialRightOffset = new Vector3(-1.9f, 2.095f, 0.35f);
 
         // Left & right offsets and material will always be the same so they are set here.
         lightProp.lightLeftOffset = new Vector3(0.36f, 1.2f, 0.26f);
