@@ -28,20 +28,42 @@ public class Room : MonoBehaviour
             wayPoints = new GameObject[3];
 }
         // Give the gameObj the Room tag.
-        gameObj.tag = "ROOM";
+        gameObj.tag = rp.tag;
         gameObj.AddComponent<MeshCollider>();
-        for(int i =0; i< wayPoints.Length; i++)
+        if (gameObj.tag == "END ROOM") // Check if this is the last level of rooms.
         {
-            wayPoints[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            wayPoints[i].transform.parent = gameObj.transform;
-            wayPoints[i].name = "Waypoint" + i.ToString();
-            wayPoints[i].tag = "WAYPOINT";
+            wayPoints[0] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            wayPoints[0].transform.parent = gameObj.transform;
+            wayPoints[0].name = "Final Waypoint";
+            wayPoints[0].tag = "WAYPOINT";
+            wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.049f);
         }
-        wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.049f);
-        wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, -0.049f);
-        wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, -0.049f);
-        // Adjust the extra waypoints positions
-        if (rp.roomIndex == 0)
+        else
+        {
+            for (int i = 0; i < wayPoints.Length; i++)
+            {
+                wayPoints[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                wayPoints[i].transform.parent = gameObj.transform;
+                wayPoints[i].name = "Waypoint" + i.ToString();
+                wayPoints[i].tag = "WAYPOINT";
+            }
+            wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.049f);
+            wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, -0.049f);
+            wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, -0.049f);
+        }
+        //for (int i = 0; i < wayPoints.Length; i++)
+        //    {
+        //        wayPoints[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //        wayPoints[i].transform.parent = gameObj.transform;
+        //        wayPoints[i].name = "Waypoint" + i.ToString();
+        //        wayPoints[i].tag = "WAYPOINT";
+        //    }
+        //    wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.049f);
+        //    wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, -0.049f);
+        //    wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, -0.049f);
+
+            // Adjust the extra waypoints positions for the first room.
+            if (rp.roomIndex == 0)
         {
             // Right hand side tunnel waypoints.
             wayPoints[3].transform.localPosition = new Vector3(-1.145f, 1.665f, 0.032f);
@@ -78,9 +100,17 @@ public class Room : MonoBehaviour
         lightRight.color = new Color(lp.lightConfig.rightLightColour.x, lp.lightConfig.rightLightColour.y, lp.lightConfig.rightLightColour.z);
         lightRight.intensity = lp.lightConfig.rightLightIntensity;
 
-        if (gameObj.transform.childCount == 0)
+    }
+    public bool FindChildWithTag(Transform parent, string tag)
+    {
+        for (int i = 0; i < parent.childCount; i++)
         {
-
+            Transform child = parent.GetChild(i);
+            if (child.tag == tag)
+            {
+                return true;
+            }
         }
+        return false;
     }
 }

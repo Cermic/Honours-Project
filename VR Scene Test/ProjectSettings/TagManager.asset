@@ -10,6 +10,7 @@ TagManager:
   - FLOOR
   - ROOM
   - WAYPOINT
+  - END ROOM
   layers:
   - Default
   - TransparentFX

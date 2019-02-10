@@ -129,6 +129,17 @@ public class RoomSetup : MonoBehaviour {
         for (int j = 0; j < roomSet.Length; j++)
         {
             roomProp.roomIndex = j;
+            if (j >= endIndex-1)
+            {
+                roomProp.tag = "END ROOM";
+                // Set room properties for the current room.
+                // if j is => endIndex , then load the end room into roomObject instead.
+                // Probably use this index to stop waypoints 2 and 3 being generated in there too.
+            }
+            else
+            {
+                roomProp.tag = "ROOM";
+            }
             if (j == 0)
             {
                 if (roomSet[j] == null) // If the first room is null construct it.
@@ -151,9 +162,6 @@ public class RoomSetup : MonoBehaviour {
                 // Finds the parent index of the room based on it's position in the array and number of branching rooms.
                 float indexFloat = j;
                 int parentRoomIndex = Mathf.CeilToInt(indexFloat /= ROOMS_PER_BRANCH) - 1;
-                // Set room properties for the current room.
-                // if j is => endIndex , then load the end room into roomObject instead.
-                // Probably use this index to stop waypoints 2 and 3 being generated in there too.
                 roomProp.rObject = roomObject;
                 roomProp.scale = new Vector3(1,1,1);
                 roomProp.parentTransform = roomSet[parentRoomIndex].gameObj.transform;
