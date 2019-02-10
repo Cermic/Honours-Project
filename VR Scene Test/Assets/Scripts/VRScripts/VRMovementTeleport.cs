@@ -28,6 +28,13 @@ public class VRMovementTeleport : MonoBehaviour {
     protected Valve.VR.EVRButtonId menuBttn = Valve.VR.EVRButtonId.k_EButton_ApplicationMenu;
     //If we are holding the right trigger down
     protected bool _triggerIsDown;
+
+    public void Awake()
+    {
+        trackedObj = GetComponent<SteamVR_TrackedObject>();
+    }
+
+
     void Start()
     {
         // Looks for the AssetController Game Object
@@ -108,10 +115,10 @@ public class VRMovementTeleport : MonoBehaviour {
         //We move the camera rig object to that position in the world and reset the trigger is down
         if (controller.GetPressUp(triggerButton))
         {
-            if (validHit && hit.collider.tag == "Room") 
+            if (validHit && hit.collider.tag == "WAYPOINT") 
             {
                 GameObject cR = GameObject.Find("Camera Rig");
-                GameObject cH = GameObject.Find("Camera (Head)");
+                GameObject cH = GameObject.Find("Camera (eye)");
                 double xCoord, yCoord, zCoord; // Round all coords to 2 decimal places
                 double cameraDirX, cameraDirY, cameraDirZ;
                 // Coordinates of Camera Rig
@@ -124,11 +131,10 @@ public class VRMovementTeleport : MonoBehaviour {
                 cameraDirZ = Math.Round(cH.transform.eulerAngles.z, 2);
                 // Add coords into the file followed by a new line
                 s = "Coords X: " + xCoord + " Y: " + yCoord + " Z: " + zCoord + "\n" 
-                + "Camera Direction X: " + cameraDirX + " Y: " + cameraDirY + " Z: " + cameraDirZ;
+                + " Camera Direction X: " + cameraDirX + " Y: " + cameraDirY + " Z: " + cameraDirZ;
                 File.AppendAllText(newTestFilePath, s + Environment.NewLine);
                 // Take Camera to point where ray cast hits
                 cR.gameObject.transform.position = hit.point; 
-                // How can I stop them moving into the wall? and restrict them to moving only on the X and Z axes?
             }
             _triggerIsDown = false;
         }

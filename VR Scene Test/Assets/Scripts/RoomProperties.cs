@@ -13,4 +13,5 @@ public struct RoomProperties
     // Rotation Value
     public Quaternion orientation;
     public Transform parentTransform;
+    public int roomIndex;
 }

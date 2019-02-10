@@ -128,6 +128,7 @@ public class RoomSetup : MonoBehaviour {
         // Constructs each room in a tree structure
         for (int j = 0; j < roomSet.Length; j++)
         {
+            roomProp.roomIndex = j;
             if (j == 0)
             {
                 if (roomSet[j] == null) // If the first room is null construct it.
@@ -151,6 +152,8 @@ public class RoomSetup : MonoBehaviour {
                 float indexFloat = j;
                 int parentRoomIndex = Mathf.CeilToInt(indexFloat /= ROOMS_PER_BRANCH) - 1;
                 // Set room properties for the current room.
+                // if j is => endIndex , then load the end room into roomObject instead.
+                // Probably use this index to stop waypoints 2 and 3 being generated in there too.
                 roomProp.rObject = roomObject;
                 roomProp.scale = new Vector3(1,1,1);
                 roomProp.parentTransform = roomSet[parentRoomIndex].gameObj.transform;
