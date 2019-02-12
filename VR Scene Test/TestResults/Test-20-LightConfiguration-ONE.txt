@@ -1,0 +1,4 @@
+Light Configuration ONE test conducted on: 11/02/2019 @ 13:26.
+Author: Jack D Smith
+Coords X: 0 Y: 1 Z: 0
+ Camera Direction X: 15.32 Y: 165.5 Z: 8.24

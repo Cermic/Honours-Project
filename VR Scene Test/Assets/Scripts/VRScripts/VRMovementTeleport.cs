@@ -29,10 +29,14 @@ public class VRMovementTeleport : MonoBehaviour {
     //If we are holding the right trigger down
     protected bool _triggerIsDown;
 
+    private SteamVR_Fade steamVRFade;
+
     public void Awake()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
+        steamVRFade = this.gameObject.AddComponent<SteamVR_Fade>();
     }
+
 
 
     void Start()
@@ -92,6 +96,8 @@ public class VRMovementTeleport : MonoBehaviour {
         RaycastHit hit;
         bool validHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity);
 
+
+
         //If the trigger on the vr controller is down, we set the _triggerISDown to true.
         if (controller.GetPressDown(triggerButton))
         {
@@ -100,23 +106,36 @@ public class VRMovementTeleport : MonoBehaviour {
 
         //If the trigger is down, we enable or create a SteamVR laser pointer.
         //If it is not down, we destroy the component to remove it.
-        if (_triggerIsDown)
+        //if (_triggerIsDown)
+        //{
+        //    if (this.GetComponent<SteamVR_LaserPointer>() == null)
+        //    {
+        //        this.gameObject.AddComponent<SteamVR_LaserPointer>();
+        //        this.gameObject.GetComponent<SteamVR_LaserPointer>().color = Color.red;
+        //    }
+        //}
+
+
+        if (validHit && hit.collider.tag == "WAYPOINT")
         {
-            if (this.GetComponent<SteamVR_LaserPointer>() == null)
-                this.gameObject.AddComponent<SteamVR_LaserPointer>();
+            CreatePointer(Color.green);
+            GameObject[] list = GameObject.FindGameObjectsWithTag("WAYPOINT");
+            for(int i=0; i<list.Length; i++) { list[i].GetComponent<Renderer>().material.color = Color.white; }
+            hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;
         }
         else
         {
-            if (this.gameObject.GetComponent<SteamVR_LaserPointer>() != null)
-                DestroyImmediate(this.gameObject.GetComponent<SteamVR_LaserPointer>());
+            CreatePointer(Color.red);
+            GameObject[] list = GameObject.FindGameObjectsWithTag("WAYPOINT");
+            for (int i = 0; i < list.Length; i++) { list[i].GetComponent<Renderer>().material.color = Color.white; }
         }
-
-        //IF the trigger is up and we have a valid teleport position on a Room
-        //We move the camera rig object to that position in the world and reset the trigger is down
-        if (controller.GetPressUp(triggerButton))
+            //IF the trigger is up and we have a valid teleport position on a Room
+            //We move the camera rig object to that position in the world and reset the trigger is down
+            if (controller.GetPressUp(triggerButton))
         {
             if (validHit && hit.collider.tag == "WAYPOINT") 
             {
+                CreatePointer(Color.green);
                 GameObject cR = GameObject.Find("Camera Rig");
                 GameObject cH = GameObject.Find("Camera (eye)");
                 double xCoord, yCoord, zCoord; // Round all coords to 2 decimal places
@@ -135,9 +154,30 @@ public class VRMovementTeleport : MonoBehaviour {
                 File.AppendAllText(newTestFilePath, s + Environment.NewLine);
                 // Take Camera to point where ray cast hits
                 cR.gameObject.transform.position = hit.point; 
+            } else
+            {
+                
             }
             _triggerIsDown = false;
         }
+    }
+
+    IEnumerator StartFade()
+    {
+        steamVRFade.OnStartFade(Color.black, 0.5f, false);
+        yield return new WaitForSeconds(1f);
+        steamVRFade.OnStartFade(Color.clear, 0.5f, false);
+    }
+
+    private void CreatePointer(Color colourCodeID)
+    {
+        if (this.gameObject.GetComponent<SteamVR_LaserPointer>() != null)
+        {
+            Destroy(this.gameObject.transform.GetChild(1).gameObject);
+            DestroyImmediate(this.gameObject.GetComponent<SteamVR_LaserPointer>());
+        }
+        this.gameObject.AddComponent<SteamVR_LaserPointer>();
+        this.gameObject.GetComponent<SteamVR_LaserPointer>().color = colourCodeID;// Color.red;
     }
 
     private static string GetNumbers(string input)

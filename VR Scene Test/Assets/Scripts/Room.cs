@@ -12,12 +12,10 @@ public class Room : MonoBehaviour
     public Room(RoomProperties rp, LightProperties lp)
     {
         // If the first room 
-        
+
         if (rp.roomIndex == 0)
         {
             gameObj = Instantiate(rp.rObject, rp.offset, rp.orientation) as GameObject;
-            wayPoints = new GameObject[7];
-            // If the first room, add more waypoints.
         }
         else // All other rooms
         {
@@ -25,56 +23,64 @@ public class Room : MonoBehaviour
             gameObj.transform.localPosition = rp.offset;
             gameObj.transform.localRotation = rp.orientation;
             gameObj.transform.localScale = rp.scale;
-            wayPoints = new GameObject[3];
-}
+        }
         // Give the gameObj the Room tag.
         gameObj.tag = rp.tag;
+        if (gameObj.tag == "FIRST ROOM")
+        {
+            wayPoints = new GameObject[9];
+            // If the first room, add more waypoints.
+        }
+        else if (gameObj.tag == "ROOM")// for end rooms that only need 1 waypoint
+        {
+            wayPoints = new GameObject[3];
+        }
+        else if (gameObj.tag == "END ROOM")
+        {
+            wayPoints = new GameObject[1];
+        }
         gameObj.AddComponent<MeshCollider>();
         if (gameObj.tag == "END ROOM") // Check if this is the last level of rooms.
         {
-            wayPoints[0] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            wayPoints[0] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             wayPoints[0].transform.parent = gameObj.transform;
             wayPoints[0].name = "Final Waypoint";
             wayPoints[0].tag = "WAYPOINT";
-            wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.049f);
+            wayPoints[0].transform.localPosition = new Vector3(0f, 1f, -15f);
+            wayPoints[0].transform.localScale = new Vector3(150f, 100f, 150f);
         }
         else
         {
             for (int i = 0; i < wayPoints.Length; i++)
             {
-                wayPoints[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                wayPoints[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 wayPoints[i].transform.parent = gameObj.transform;
                 wayPoints[i].name = "Waypoint" + i.ToString();
                 wayPoints[i].tag = "WAYPOINT";
             }
-            wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.049f);
-            wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, -0.049f);
-            wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, -0.049f);
+            wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.01f);
+            wayPoints[0].transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
+            wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, -0.01f);
+            wayPoints[1].transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
+            wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, -0.01f);
+            wayPoints[2].transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
         }
-        //for (int i = 0; i < wayPoints.Length; i++)
-        //    {
-        //        wayPoints[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //        wayPoints[i].transform.parent = gameObj.transform;
-        //        wayPoints[i].name = "Waypoint" + i.ToString();
-        //        wayPoints[i].tag = "WAYPOINT";
-        //    }
-        //    wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.049f);
-        //    wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, -0.049f);
-        //    wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, -0.049f);
-
             // Adjust the extra waypoints positions for the first room.
             if (rp.roomIndex == 0)
         {
             // Right hand side tunnel waypoints.
-            wayPoints[3].transform.localPosition = new Vector3(-1.145f, 1.665f, 0.032f);
-            wayPoints[3].transform.localRotation = Quaternion.Euler(60f, -90f, 73f);
-            wayPoints[4].transform.localPosition = new Vector3(-1.84f, 2.06f, 0.275f);
-            wayPoints[4].transform.localRotation = Quaternion.Euler(60f, -90f, 73f);
+            wayPoints[3].transform.localPosition = new Vector3(-1.145f, 1.665f, 0.02f);
+            wayPoints[4].transform.localPosition = new Vector3(-1.84f, 2.06f, 0.3f);
+            wayPoints[5].transform.localPosition = new Vector3(-2.05f, 2.18f, 0.32f);
             // Left hand side tunnel waypoints.
-            wayPoints[5].transform.localPosition = new Vector3(1.08f, 1.625f, -0.11f);
-            wayPoints[5].transform.localRotation = Quaternion.Euler(120.4f, -90f, -107f);
-            wayPoints[6].transform.localPosition = new Vector3(1.77f, 2.03f, -0.355f);
-            wayPoints[6].transform.localRotation = Quaternion.Euler(120.4f, -90f, -107f);
+            wayPoints[6].transform.localPosition = new Vector3(0.75f, 1.43f, -0.02f);
+            wayPoints[7].transform.localPosition = new Vector3(1.04f, 1.6f, -0.06f);
+            wayPoints[8].transform.localPosition = new Vector3(1.77f, 2.03f, -0.32f);
+            // wayPoints[8].transform.localRotation = Quaternion.Euler(120.4f, -90f, -107f);
+            foreach (GameObject wayP in wayPoints)
+            {
+                wayP.transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
+            }
         }
         leftSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         leftSphere.GetComponent<Renderer>().material = lp.lightMat;

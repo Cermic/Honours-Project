@@ -21,13 +21,13 @@ public class RoomSetup : MonoBehaviour {
     private Vector3 firstRoomCoords;
     private Quaternion firstRoomAngle;
     private Quaternion firstRoomOrientation, leftOrientation, rightOrientation;
-    private Vector3 initialLeftOffset, initialRightOffset, leftOffset, rightOffset;
-    private Vector3 lightLeftOffset, lightRightOffset;
+    private Vector3 initialLeftOffset, initialRightOffset, leftOffset, rightOffset, endLeftOffset, endRightOffset;
+    private Vector3 lightLeftOffset, lightRightOffset, lastLightLeftOffset, lastLightRightOffset;
     // Bool to be used to turn on and off the experiment state
     public bool isControl = false;
     private RoomProperties roomProp;
     private LightProperties lightProp;
-    Object firstRoomObject, roomObject;
+    Object firstRoomObject, roomObject, endRoomObject;
 
     private List<float> colourValues;
     private List<int> chainValues;
@@ -45,6 +45,7 @@ public class RoomSetup : MonoBehaviour {
         // Load room objects
         firstRoomObject = Resources.Load("Prefabs/FirstRoom");
         roomObject = Resources.Load("Prefabs/Room");
+        endRoomObject = Resources.Load("Prefabs/EndRoom");
         // Load sphere primitive to represent a light
         firstRoomCoords = new Vector3(0, 0, 0);
         firstRoomOrientation = Quaternion.Euler(-90, 0, 0);
@@ -58,9 +59,13 @@ public class RoomSetup : MonoBehaviour {
 
         lightLeftOffset = new Vector3(0.36f, 1.2f, 0.26f);
         lightRightOffset = new Vector3(-0.36f, 1.2f, 0.26f);
+        lastLightLeftOffset = new Vector3(385, 170, 215);
+        lastLightRightOffset = new Vector3(-385, 170, 215);
 
-        leftOffset = new Vector3(0.85f, 1.5f, 0f);
-        rightOffset = new Vector3(-0.85f, 1.5f, 0f);
+        leftOffset = new Vector3(0.85f, 1.49f, 0f);
+        rightOffset = new Vector3(-0.85f, 1.49f, 0f);
+        endLeftOffset = new Vector3(1.73f, 2f, 0f);
+        endRightOffset = new Vector3(-1.73f, 2f, 0f);
         // Standard room scale - this is used to scale down the rooms as they adopt the scale of their parent (far too big)
         roomProp.scale = new Vector3(1f, 1f, 1f);
         leftOrientation = Quaternion.Euler(0, 0, -60);
@@ -129,22 +134,12 @@ public class RoomSetup : MonoBehaviour {
         for (int j = 0; j < roomSet.Length; j++)
         {
             roomProp.roomIndex = j;
-            if (j >= endIndex-1)
-            {
-                roomProp.tag = "END ROOM";
-                // Set room properties for the current room.
-                // if j is => endIndex , then load the end room into roomObject instead.
-                // Probably use this index to stop waypoints 2 and 3 being generated in there too.
-            }
-            else
-            {
-                roomProp.tag = "ROOM";
-            }
             if (j == 0)
             {
                 if (roomSet[j] == null) // If the first room is null construct it.
                 {
                     // Set room properties for the first room.
+                    roomProp.tag = "FIRST ROOM";
                     roomProp.rObject = firstRoomObject;
                     roomProp.offset = firstRoomCoords;
                     roomProp.orientation = firstRoomOrientation;
@@ -162,8 +157,20 @@ public class RoomSetup : MonoBehaviour {
                 // Finds the parent index of the room based on it's position in the array and number of branching rooms.
                 float indexFloat = j;
                 int parentRoomIndex = Mathf.CeilToInt(indexFloat /= ROOMS_PER_BRANCH) - 1;
-                roomProp.rObject = roomObject;
-                roomProp.scale = new Vector3(1,1,1);
+                if (j >= endIndex - 1) // If the index is that of an end room
+                {
+                    roomProp.rObject = endRoomObject;
+                    roomProp.tag = "END ROOM";
+                    roomProp.scale = new Vector3(0.001f, 0.001f, 0.001f);
+                }
+                else
+                {
+                    roomProp.rObject = roomObject;
+                    roomProp.tag = "ROOM";
+                    roomProp.scale = new Vector3(1, 1, 1);
+                }
+                
+                
                 roomProp.parentTransform = roomSet[parentRoomIndex].gameObj.transform;
                 // Set light properties for the current room.
                 lightProp.lightConfig = roomArray[j];
@@ -184,13 +191,31 @@ public class RoomSetup : MonoBehaviour {
                     // Child rooms of the first two ---
                     if (j % 2 == 0) // If the index is even, the room is on the left
                     {
-                        roomProp.offset = leftOffset;
+                        if (roomProp.tag == "END ROOM")
+                        {
+                            lightProp.lightLeftOffset = lastLightLeftOffset;
+                            lightProp.lightRightOffset = lastLightRightOffset;
+                            roomProp.offset = endLeftOffset;
+                        }
+                        else
+                        {
+                            roomProp.offset = leftOffset;
+                        }
                         roomProp.orientation = leftOrientation;
                         roomSet[j] = new Room(roomProp, lightProp);
                     }
                     else // If the index is odd, the room is on the right
                     {
-                        roomProp.offset = rightOffset;
+                        if (roomProp.tag == "END ROOM")
+                        {
+                            lightProp.lightLeftOffset = lastLightLeftOffset;
+                            lightProp.lightRightOffset = lastLightRightOffset;
+                            roomProp.offset = endRightOffset;
+                        }
+                        else
+                        {
+                            roomProp.offset = rightOffset;
+                        }
                         roomProp.orientation = rightOrientation;
                         roomSet[j] = new Room(roomProp, lightProp);
                     }
