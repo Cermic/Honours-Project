@@ -42,6 +42,7 @@ public class Room : MonoBehaviour
         gameObj.AddComponent<MeshCollider>();
         if (gameObj.tag == "END ROOM") // Check if this is the last level of rooms.
         {
+            gameObj.AddComponent<BoxCollider>().isTrigger = true;
             wayPoints[0] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             wayPoints[0].transform.parent = gameObj.transform;
             wayPoints[0].name = "Final Waypoint";
