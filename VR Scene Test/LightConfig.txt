@@ -22,6 +22,9 @@
 |Blue High Brightness vs Red Low Brightness|
 #8<C0.0,0.0,1.0 C1.0,0.0,0.0 I1.0 I0.5>
 
+|Control Experiment - Uniform Light Colour and Brightness|
+#9<C1.0,1.0,1.0 C1.0,1.0,1.0 I1.0 I1.0>
+
 C = Colour Value
 I = Illuminance Value
 

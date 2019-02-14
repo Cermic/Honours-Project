@@ -15,7 +15,7 @@ public class RoomSetup : MonoBehaviour {
     private Room[] roomSet;
     // Light config enum that can be changed in editor
     public enum LightConfiguration
-    { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE}
+    { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, CONTROL}
 
     public LightConfiguration lightconfig;
     private Vector3 firstRoomCoords;
@@ -23,8 +23,7 @@ public class RoomSetup : MonoBehaviour {
     private Quaternion firstRoomOrientation, leftOrientation, rightOrientation;
     private Vector3 initialLeftOffset, initialRightOffset, leftOffset, rightOffset, endLeftOffset, endRightOffset;
     private Vector3 lightLeftOffset, lightRightOffset, lastLightLeftOffset, lastLightRightOffset;
-    // Bool to be used to turn on and off the experiment state
-    public bool isControl = false;
+
     private RoomProperties roomProp;
     private LightProperties lightProp;
     Object firstRoomObject, roomObject, endRoomObject;
@@ -119,7 +118,9 @@ public class RoomSetup : MonoBehaviour {
             }
         }
         // Assign end rooms to deafult values
-        for (int j = lc.Length - 1; j < roomArray.Length; j++)
+        // 8 signifies how many light properties there are 
+        // As they are contained in an array that starts at 0 we go with (8-1) = 7
+        for (int j = 7; j < roomArray.Length; j++) 
         {
             // Left Light rgb values
             roomArray[j].leftLightColour = new Vector3(1.0f, 1.0f, 1.0f);
@@ -265,7 +266,7 @@ public class RoomSetup : MonoBehaviour {
     }
     void ProcessConfig(List<float> colourValues, LightConfig[] lc)
     {
-        int offset = lc.Length;
+        int offset = 8;
         for (int i = 0; i < lc.Length; i++)
         {
             // Left Light rgb values
@@ -292,60 +293,65 @@ public class RoomSetup : MonoBehaviour {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i]; }
         }
-        if (lightconfig == LightConfiguration.TWO)
+        else if (lightconfig == LightConfiguration.TWO)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + offset]; }
         }
-        if (lightconfig == LightConfiguration.THREE)
+        else if (lightconfig == LightConfiguration.THREE)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 2)]; }
         }
-        if (lightconfig == LightConfiguration.FOUR)
+        else if (lightconfig == LightConfiguration.FOUR)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 3)]; }
         }
-        if (lightconfig == LightConfiguration.FIVE)
+        else if (lightconfig == LightConfiguration.FIVE)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 4)]; }
         }
-        if (lightconfig == LightConfiguration.SIX)
+        else if (lightconfig == LightConfiguration.SIX)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 5)]; }
         }
-        if (lightconfig == LightConfiguration.SEVEN)
+        else if (lightconfig == LightConfiguration.SEVEN)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 6)]; }
         }
-        if (lightconfig == LightConfiguration.EIGHT)
+        else if (lightconfig == LightConfiguration.EIGHT)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 7)]; }
         }
-        if (lightconfig == LightConfiguration.NINE)
+        else if (lightconfig == LightConfiguration.NINE)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 8)]; }
         }
-        if (lightconfig == LightConfiguration.TEN)
+        else if (lightconfig == LightConfiguration.TEN)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 9)]; }
         }
-        if (lightconfig == LightConfiguration.ELEVEN)
+        else if (lightconfig == LightConfiguration.ELEVEN)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 10)]; }
         }
-        if (lightconfig == LightConfiguration.TWELVE)
+        else if (lightconfig == LightConfiguration.TWELVE)
         {
             for (int i = 0; i < 3; i++)
             { roomCombination[i] = chainValues[i + (offset * 11)]; }
+        }
+        else if (lightconfig == LightConfiguration.CONTROL)
+        {
+            for (int i = 0; i < 3; i++)
+            { roomCombination[i] = chainValues[i + (offset * 12)]; }
         }
     }
 }
