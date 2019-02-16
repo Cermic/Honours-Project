@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class EndReached : MonoBehaviour {
     // Use this for initialization
     private GameObject canvasGO;
+    Vector2 screenSize = new Vector2(Screen.width, Screen.height);
+    Canvas canvas;
     private void Awake()
     {
         // Load the Arial font from the Unity Resources folder.
@@ -20,10 +22,12 @@ public class EndReached : MonoBehaviour {
         canvasGO.SetActive(false);
 
         // Get canvas from the GameObject.
-        Canvas canvas = canvasGO.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-
-        // Create the Text GameObject.
+        canvas = canvasGO.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.planeDistance = 0.6f;
+        GameObject cameraEye = GameObject.Find("Camera (eye)");
+        
+        // Create the Text GameObject
         GameObject textGO = new GameObject();
         textGO.transform.parent = canvasGO.transform;
         textGO.AddComponent<Text>();
@@ -33,16 +37,16 @@ public class EndReached : MonoBehaviour {
         text.font = arial;
         text.text = "You have found an End Room! \n\n Please take off the VR equipment to finish the experiment.";
         text.fontSize = 24;
-        text.color = Color.green;
+        text.color = Color.white;
         text.alignment = TextAnchor.MiddleCenter;
 
         // Provide Text position and size using RectTransform.
         RectTransform rectTransform = text.GetComponent<RectTransform>();
         rectTransform.localPosition = new Vector3(0, 0, 0);
         rectTransform.sizeDelta = new Vector2(600, 200);
+        canvas.worldCamera = cameraEye.GetComponent<Camera>();
     }
     void Start () {
-        //gameOverPanel.SetActive(false);
         gameObject.AddComponent<Rigidbody>().useGravity = false;
         BoxCollider bC = gameObject.AddComponent<BoxCollider>();
         bC.isTrigger = true;

@@ -1,0 +1,34 @@
+Light Configuration TWELVE test conducted on: 15/02/2019 @ 17:20.
+Author: Jack D Smith
+Coords X: 0 Y: 0 Z: -1.02
+ Camera Direction X: 359.95 Y: 174.96 Z: 353.77
+Coords X: 0.07 Y: 0.23 Z: -6.33
+ Camera Direction X: 5.17 Y: 199.8 Z: 357.14
+Coords X: -3.05 Y: 0.24 Z: -11.38
+ Camera Direction X: 356.96 Y: 241.6 Z: 353.53
+Coords X: -17.81 Y: 3.22 Z: -20.2
+ Camera Direction X: 0.48 Y: 241.42 Z: 351.89
+Coords X: -24.52 Y: 3.69 Z: -24.02
+ Camera Direction X: 358.66 Y: 56.87 Z: 352.88
+Coords X: -18.85 Y: 3.58 Z: -20.75
+ Camera Direction X: 1.86 Y: 233.67 Z: 352.79
+Coords X: -24.49 Y: 3.77 Z: -24.13
+ Camera Direction X: 0.21 Y: 206.21 Z: 356.82
+Coords X: -27.41 Y: 3.8 Z: -29.27
+ Camera Direction X: 2.69 Y: 184.75 Z: 351.2
+Coords X: -27.71 Y: 3.62 Z: -42.05
+ Camera Direction X: 355.64 Y: 206.02 Z: 351.68
+Coords X: -30.58 Y: 3.7 Z: -47.18
+ Camera Direction X: 359.71 Y: 38.7 Z: 350.97
+Coords X: -28.07 Y: 3.68 Z: -43.31
+ Camera Direction X: 356.96 Y: 207.34 Z: 352.96
+Coords X: -30.49 Y: 3.7 Z: -47.26
+ Camera Direction X: 7.06 Y: 33.17 Z: 354.41
+Coords X: -27.8 Y: 3.74 Z: -43.41
+ Camera Direction X: 2.64 Y: 143.27 Z: 352.84
+Coords X: -24.6 Y: 3.78 Z: -47.16
+ Camera Direction X: 63.68 Y: 138 Z: 352.81
+Coords X: -24.46 Y: 4.13 Z: -47.65
+ Camera Direction X: 66.47 Y: 97.29 Z: 348.16
+Coords X: -24.11 Y: 4.05 Z: -48.04
+ Camera Direction X: 66.79 Y: 112.45 Z: 349.75

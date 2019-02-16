@@ -42,13 +42,16 @@ public class Room : MonoBehaviour
         gameObj.AddComponent<MeshCollider>();
         if (gameObj.tag == "END ROOM") // Check if this is the last level of rooms.
         {
-            gameObj.AddComponent<BoxCollider>().isTrigger = true;
+            BoxCollider bC = gameObj.AddComponent<BoxCollider>();
+            bC.isTrigger = true;
+            bC.center = new Vector3(0f, 0f, 150f);
+            bC.size = new Vector3(300, 300, 50);
             wayPoints[0] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             wayPoints[0].transform.parent = gameObj.transform;
             wayPoints[0].name = "Final Waypoint";
             wayPoints[0].tag = "WAYPOINT";
-            wayPoints[0].transform.localPosition = new Vector3(0f, 1f, -15f);
-            wayPoints[0].transform.localScale = new Vector3(150f, 100f, 150f);
+            wayPoints[0].transform.localPosition = new Vector3(0f, 1f, 0f);
+            wayPoints[0].transform.localScale = new Vector3(150f, 50, 150f);
         }
         else
         {
@@ -59,28 +62,32 @@ public class Room : MonoBehaviour
                 wayPoints[i].name = "Waypoint" + i.ToString();
                 wayPoints[i].tag = "WAYPOINT";
             }
-            wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, -0.01f);
-            wayPoints[0].transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
-            wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, -0.01f);
-            wayPoints[1].transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
-            wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, -0.01f);
-            wayPoints[2].transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
+            wayPoints[0].transform.localPosition = new Vector3(0f, 0.7f, 0f);
+            wayPoints[0].transform.localScale = new Vector3(0.15f, 0.05f, 0.15f);
+            wayPoints[1].transform.localPosition = new Vector3(0.33f, 1.2f, 0f);
+            wayPoints[1].transform.localScale = new Vector3(0.15f, 0.05f, 0.15f);
+            wayPoints[2].transform.localPosition = new Vector3(-0.33f, 1.2f, 0f);
+            wayPoints[2].transform.localScale = new Vector3(0.15f, 0.05f, 0.15f);
         }
             // Adjust the extra waypoints positions for the first room.
             if (rp.roomIndex == 0)
         {
             // Right hand side tunnel waypoints.
-            wayPoints[3].transform.localPosition = new Vector3(-1.145f, 1.665f, 0.02f);
-            wayPoints[4].transform.localPosition = new Vector3(-1.84f, 2.06f, 0.3f);
-            wayPoints[5].transform.localPosition = new Vector3(-2.05f, 2.18f, 0.32f);
+            wayPoints[3].transform.localPosition = new Vector3(-1.145f, 1.665f, 0.08f);
+            wayPoints[3].transform.localRotation = Quaternion.Euler(105f, -45f, -60f);
+            wayPoints[4].transform.localPosition = new Vector3(-1.84f, 2.06f, 0.325f);
+            wayPoints[4].transform.localRotation = Quaternion.Euler(105f, -45f, -60f);
+            wayPoints[5].transform.localPosition = new Vector3(-2.05f, 2.18f, 0.352f);
             // Left hand side tunnel waypoints.
-            wayPoints[6].transform.localPosition = new Vector3(0.75f, 1.43f, -0.02f);
-            wayPoints[7].transform.localPosition = new Vector3(1.04f, 1.6f, -0.06f);
-            wayPoints[8].transform.localPosition = new Vector3(1.77f, 2.03f, -0.32f);
+            wayPoints[6].transform.localPosition = new Vector3(0.75f, 1.43f, 0f);
+            wayPoints[7].transform.localPosition = new Vector3(1.04f, 1.6f, -0.047f);
+            wayPoints[7].transform.localRotation = Quaternion.Euler(103f, -115f, -130f);
+            wayPoints[8].transform.localPosition = new Vector3(1.77f, 2.03f, -0.305f);
+            wayPoints[8].transform.localRotation = Quaternion.Euler(103f, -115f, -130f);
             // wayPoints[8].transform.localRotation = Quaternion.Euler(120.4f, -90f, -107f);
             foreach (GameObject wayP in wayPoints)
             {
-                wayP.transform.localScale = new Vector3(0.15f, 0.1f, 0.15f);
+                wayP.transform.localScale = new Vector3(0.15f, 0.05f, 0.15f);
             }
         }
         leftSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
