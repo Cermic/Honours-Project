@@ -154,7 +154,7 @@ public class VRMovementTeleport : MonoBehaviour {
                 File.AppendAllText(newTestFilePath, s + Environment.NewLine);
                 // Take Camera to point where ray cast hits
                 //cR.gameObject.transform.position = hit.point; 
-                cR.gameObject.transform.position = hit.collider.transform.position; // This should take the person to the centre of the sphere instead of the hit point. 
+                cR.gameObject.transform.position = hit.collider.transform.position;// This should take the person to the centre of the sphere instead of the hit point. 
             }
             else
             {

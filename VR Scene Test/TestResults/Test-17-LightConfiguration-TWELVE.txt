@@ -1,0 +1,14 @@
+Light Configuration TWELVE test conducted on: 16/02/2019 @ 19:50.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 11.58 Y: 179.9 Z: 354.98
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 7.78 Y: 198.51 Z: 358.14
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 1.99 Y: 225.27 Z: 6.8
+Coords X: -11.45 Y: 0.8 Z: -16.65
+ Camera Direction X: 356.6 Y: 224.81 Z: 9.62
+Coords X: -18.4 Y: 3.25 Z: -20.6
+ Camera Direction X: 4.86 Y: 224.56 Z: 7.18
+Coords X: -20.5 Y: 3.52 Z: -21.8
+ Camera Direction X: 13.85 Y: 223.38 Z: 358.06
