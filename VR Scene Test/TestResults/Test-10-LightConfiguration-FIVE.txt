@@ -1,0 +1,22 @@
+Light Configuration FIVE test conducted on: 26/02/2019 @ 12:07.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 16.33 Y: 182.67 Z: 356.86
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 8.18 Y: 212.13 Z: 353.42
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 1.04 Y: 242.55 Z: 352.85
+Coords X: -11.45 Y: 0.8 Z: -16.65
+ Camera Direction X: 1.71 Y: 241.85 Z: 353.34
+Coords X: -18.4 Y: 3.25 Z: -20.6
+ Camera Direction X: 12.48 Y: 241.76 Z: 354.22
+Coords X: -20.5 Y: 3.52 Z: -21.8
+ Camera Direction X: 11.34 Y: 242.11 Z: 353.93
+Coords X: -25.06 Y: 3.5 Z: -24.45
+ Camera Direction X: 7.65 Y: 269.54 Z: 352.64
+Coords X: -31.04 Y: 3.5 Z: -24.09
+ Camera Direction X: 359.72 Y: 305.06 Z: 354.47
+Coords X: -42.22 Y: 3.5 Z: -17.54
+ Camera Direction X: 2.69 Y: 267.91 Z: 0.04
+Coords X: -48.2 Y: 3.5 Z: -17.9
+ Camera Direction X: 2.15 Y: 253.04 Z: 352.08

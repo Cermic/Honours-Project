@@ -1,0 +1,30 @@
+Light Configuration CONTROL test conducted on: 26/02/2019 @ 13:05.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 16.65 Y: 187.1 Z: 356.23
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 9.99 Y: 153.72 Z: 348.18
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 11.45 Y: 121.85 Z: 359.18
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 23.32 Y: 121.11 Z: 0.33
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 17.25 Y: 117.51 Z: 357.47
+Coords X: 17.7 Y: -3.05 Z: -20.3
+ Camera Direction X: 12.12 Y: 119.25 Z: 358.24
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 4.76 Y: 94.16 Z: 350.91
+Coords X: 31.04 Y: -3.5 Z: -24.09
+ Camera Direction X: 18.09 Y: 249 Z: 355.17
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 13.15 Y: 144.13 Z: 356.9
+Coords X: 27.74 Y: -3.5 Z: -29.81
+ Camera Direction X: 9.58 Y: 173.29 Z: 359.85
+Coords X: 27.65 Y: -3.5 Z: -42.76
+ Camera Direction X: 9.84 Y: 214.74 Z: 358.1
+Coords X: 24.35 Y: -3.5 Z: -47.76
+ Camera Direction X: 11.03 Y: 40.88 Z: 351.87
+Coords X: 27.65 Y: -3.5 Z: -42.76
+ Camera Direction X: 8.98 Y: 152.98 Z: 356.6
+Coords X: 30.95 Y: -3.5 Z: -47.76
+ Camera Direction X: 8.04 Y: 125.25 Z: 353.84

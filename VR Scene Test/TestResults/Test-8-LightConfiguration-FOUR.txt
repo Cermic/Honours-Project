@@ -1,0 +1,26 @@
+Light Configuration FOUR test conducted on: 22/02/2019 @ 15:40.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 21.98 Y: 173.04 Z: 0.13
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 8.07 Y: 214.47 Z: 2
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 11.89 Y: 243.27 Z: 1.12
+Coords X: -11.45 Y: 0.8 Z: -16.65
+ Camera Direction X: 7.4 Y: 239.32 Z: 359.58
+Coords X: -18.4 Y: 3.25 Z: -20.6
+ Camera Direction X: 13.7 Y: 238.05 Z: 359.73
+Coords X: -20.5 Y: 3.52 Z: -21.8
+ Camera Direction X: 14.71 Y: 238.07 Z: 359.74
+Coords X: -25.06 Y: 3.5 Z: -24.45
+ Camera Direction X: 19.1 Y: 196.86 Z: 5.6
+Coords X: -27.74 Y: 3.5 Z: -29.81
+ Camera Direction X: 15.45 Y: 169.78 Z: 359.84
+Coords X: -27.65 Y: 3.5 Z: -42.76
+ Camera Direction X: 11.17 Y: 140.35 Z: 358.16
+Coords X: -24.35 Y: 3.5 Z: -47.76
+ Camera Direction X: 15.6 Y: 325.81 Z: 357.82
+Coords X: -27.65 Y: 3.5 Z: -42.76
+ Camera Direction X: 15.86 Y: 150.22 Z: 0.6
+Coords X: -24.35 Y: 3.5 Z: -47.76
+ Camera Direction X: 13.88 Y: 116.84 Z: 0.17

@@ -1,0 +1,22 @@
+Light Configuration ELEVEN test conducted on: 28/02/2019 @ 15:03.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 9.66 Y: 182.3 Z: 358.69
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 1.06 Y: 155.89 Z: 358.4
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 345.67 Y: 118.97 Z: 358.39
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 17.83 Y: 122.22 Z: 358.84
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 19.17 Y: 122.2 Z: 359.12
+Coords X: 17.7 Y: -3.05 Z: -20.3
+ Camera Direction X: 12.87 Y: 121.79 Z: 358.76
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 1.82 Y: 142.11 Z: 358.39
+Coords X: 27.74 Y: -3.5 Z: -29.81
+ Camera Direction X: 3.61 Y: 180.32 Z: 358.46
+Coords X: 27.65 Y: -3.5 Z: -42.76
+ Camera Direction X: 3.57 Y: 200.33 Z: 358.06
+Coords X: 24.35 Y: -3.5 Z: -47.76
+ Camera Direction X: 3.3 Y: 235.63 Z: 359.46

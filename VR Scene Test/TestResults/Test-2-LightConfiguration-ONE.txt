@@ -1,0 +1,54 @@
+Light Configuration ONE test conducted on: 21/02/2019 @ 14:08.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 14.11 Y: 179.89 Z: 358.23
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 6.74 Y: 143.52 Z: 357.41
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 12.24 Y: 116.89 Z: 358.14
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 18.81 Y: 121.05 Z: 358.71
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 3.16 Y: 299.18 Z: 4.1
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 2.5 Y: 296.47 Z: 3.18
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 5.58 Y: 320.71 Z: 2.56
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 9.28 Y: 144.85 Z: 0.23
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 11.19 Y: 328.43 Z: 3.82
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 9.57 Y: 213.89 Z: 357.42
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 4.74 Y: 244.41 Z: 358.58
+Coords X: -11.45 Y: 0.8 Z: -16.65
+ Camera Direction X: 0.44 Y: 239.78 Z: 359.86
+Coords X: -18.4 Y: 3.25 Z: -20.6
+ Camera Direction X: 21.45 Y: 68.7 Z: 355.84
+Coords X: -11.45 Y: 0.8 Z: -16.65
+ Camera Direction X: 16.87 Y: 71.73 Z: 357.93
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 15.8 Y: 43.61 Z: 355.28
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 8.43 Y: 150.44 Z: 0
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 12.45 Y: 123.46 Z: 358.72
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 16.21 Y: 125.05 Z: 357.68
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 18.86 Y: 122.11 Z: 357.2
+Coords X: 17.7 Y: -3.05 Z: -20.3
+ Camera Direction X: 14.47 Y: 121.11 Z: 357.22
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 5.48 Y: 81.07 Z: 1.55
+Coords X: 31.04 Y: -3.5 Z: -24.09
+ Camera Direction X: 6.95 Y: 262.03 Z: 0.04
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 6.53 Y: 136.99 Z: 358.16
+Coords X: 27.74 Y: -3.5 Z: -29.81
+ Camera Direction X: 6.58 Y: 184.63 Z: 359.43
+Coords X: 27.65 Y: -3.5 Z: -42.76
+ Camera Direction X: 1.98 Y: 139.45 Z: 359.14
+Coords X: 30.95 Y: -3.5 Z: -47.76
+ Camera Direction X: 10.41 Y: 121.74 Z: 356.66
