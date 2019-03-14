@@ -96,25 +96,11 @@ public class VRMovementTeleport : MonoBehaviour {
         RaycastHit hit;
         bool validHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity);
 
-
-
         //If the trigger on the vr controller is down, we set the _triggerISDown to true.
         if (controller.GetPressDown(triggerButton))
         {
             _triggerIsDown = true;
         }
-
-        //If the trigger is down, we enable or create a SteamVR laser pointer.
-        //If it is not down, we destroy the component to remove it.
-        //if (_triggerIsDown)
-        //{
-        //    if (this.GetComponent<SteamVR_LaserPointer>() == null)
-        //    {
-        //        this.gameObject.AddComponent<SteamVR_LaserPointer>();
-        //        this.gameObject.GetComponent<SteamVR_LaserPointer>().color = Color.red;
-        //    }
-        //}
-
 
         if (validHit && hit.collider.tag == "WAYPOINT")
         {
@@ -140,6 +126,8 @@ public class VRMovementTeleport : MonoBehaviour {
                 GameObject cH = GameObject.Find("Camera (eye)");
                 double xCoord, yCoord, zCoord; // Round all coords to 2 decimal places
                 double cameraDirX, cameraDirY, cameraDirZ;
+                // This will take the camera to the centre of the object.
+                cR.gameObject.transform.position = hit.collider.transform.position;
                 // Coordinates of Camera Rig
                 xCoord = Math.Round(cR.transform.position.x, 2);
                 yCoord = Math.Round(cR.transform.position.y, 2);
@@ -152,9 +140,6 @@ public class VRMovementTeleport : MonoBehaviour {
                 s = "Coords X: " + xCoord + " Y: " + yCoord + " Z: " + zCoord + "\n" 
                 + " Camera Direction X: " + cameraDirX + " Y: " + cameraDirY + " Z: " + cameraDirZ;
                 File.AppendAllText(newTestFilePath, s + Environment.NewLine);
-                // Take Camera to point where ray cast hits
-                //cR.gameObject.transform.position = hit.point; 
-                cR.gameObject.transform.position = hit.collider.transform.position;// This should take the person to the centre of the sphere instead of the hit point. 
             }
             else
             {
@@ -179,7 +164,7 @@ public class VRMovementTeleport : MonoBehaviour {
             DestroyImmediate(this.gameObject.GetComponent<SteamVR_LaserPointer>());
         }
         this.gameObject.AddComponent<SteamVR_LaserPointer>();
-        this.gameObject.GetComponent<SteamVR_LaserPointer>().color = colourCodeID;// Color.red;
+        this.gameObject.GetComponent<SteamVR_LaserPointer>().color = colourCodeID;
     }
 
     private static string GetNumbers(string input)

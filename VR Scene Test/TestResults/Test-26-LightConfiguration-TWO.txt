@@ -1,0 +1,24 @@
+Light Configuration TWO test conducted on: 04/03/2019 @ 12:17.
+Author: Jack D Smith
+Coords X: 0 Y: 0.8 Z: -1.02
+ Camera Direction X: 20.44 Y: 173.38 Z: 355.73
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 4.83 Y: 132.09 Z: 354.19
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 17.2 Y: 121.32 Z: 357.79
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 20.02 Y: 128.39 Z: 358.02
+Coords X: 17.7 Y: -3.05 Z: -20.3
+ Camera Direction X: 0.25 Y: 290.91 Z: 357.31
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 14.12 Y: 124.82 Z: 357.84
+Coords X: 17.7 Y: -3.05 Z: -20.3
+ Camera Direction X: 359.03 Y: 122.34 Z: 355.97
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 4.64 Y: 79.45 Z: 5.85
+Coords X: 31.04 Y: -3.5 Z: -24.09
+ Camera Direction X: 11.49 Y: 56.95 Z: 359.37
+Coords X: 42.22 Y: -3.5 Z: -17.54
+ Camera Direction X: 8.62 Y: 94.29 Z: 358.98
+Coords X: 48.2 Y: -3.5 Z: -17.9
+ Camera Direction X: 7.96 Y: 122.43 Z: 356.59
