@@ -1,0 +1,22 @@
+Light Configuration THREE test conducted on: 22/02/2019 @ 15:14.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 11.45 Y: 178.56 Z: 358.45
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 9.08 Y: 211.51 Z: 356.36
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 3.34 Y: 235.82 Z: 356.5
+Coords X: -11.45 Y: 0.8 Z: -16.65
+ Camera Direction X: 358.1 Y: 237.1 Z: 356.99
+Coords X: -18.4 Y: 3.25 Z: -20.6
+ Camera Direction X: 6.64 Y: 245.17 Z: 356.45
+Coords X: -20.5 Y: 3.52 Z: -21.8
+ Camera Direction X: 6.43 Y: 241.36 Z: 357.46
+Coords X: -25.06 Y: 3.5 Z: -24.45
+ Camera Direction X: 8.32 Y: 208.38 Z: 358.38
+Coords X: -27.74 Y: 3.5 Z: -29.81
+ Camera Direction X: 8.25 Y: 187.44 Z: 358.31
+Coords X: -27.65 Y: 3.5 Z: -42.76
+ Camera Direction X: 5.95 Y: 215.36 Z: 357.06
+Coords X: -30.95 Y: 3.5 Z: -47.76
+ Camera Direction X: 4.48 Y: 237.36 Z: 356.08

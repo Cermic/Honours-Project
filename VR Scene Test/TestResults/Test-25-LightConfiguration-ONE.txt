@@ -1,0 +1,22 @@
+Light Configuration ONE test conducted on: 01/03/2019 @ 15:09.
+Author: Jack D Smith
+Coords X: 0 Y: 0.8 Z: -1.02
+ Camera Direction X: 16.11 Y: 184.4 Z: 4.89
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 8 Y: 151.89 Z: 1.54
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 11.81 Y: 135.8 Z: 2.55
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 17.62 Y: 130.61 Z: 3.4
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 18.09 Y: 128.81 Z: 3.75
+Coords X: 17.7 Y: -3.05 Z: -20.3
+ Camera Direction X: 16.51 Y: 128.62 Z: 3.62
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 9.87 Y: 160.59 Z: 4.7
+Coords X: 27.74 Y: -3.5 Z: -29.81
+ Camera Direction X: 12.07 Y: 186.08 Z: 4.74
+Coords X: 27.65 Y: -3.5 Z: -42.76
+ Camera Direction X: 5.14 Y: 209.85 Z: 5.8
+Coords X: 24.35 Y: -3.5 Z: -47.76
+ Camera Direction X: 9.72 Y: 231.4 Z: 7.77

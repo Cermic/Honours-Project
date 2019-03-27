@@ -1,0 +1,22 @@
+Light Configuration EIGHT test conducted on: 27/02/2019 @ 13:34.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 24.87 Y: 185.92 Z: 355.33
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 13.06 Y: 147.66 Z: 356.31
+Coords X: 3.3 Y: 0 Z: -12
+ Camera Direction X: 12.91 Y: 114.17 Z: 5.34
+Coords X: 7.5 Y: 0 Z: -14.3
+ Camera Direction X: 23.63 Y: 119.49 Z: 2.57
+Coords X: 10.4 Y: -0.47 Z: -16
+ Camera Direction X: 23.03 Y: 120.02 Z: 2.68
+Coords X: 17.7 Y: -3.05 Z: -20.3
+ Camera Direction X: 0.65 Y: 117.44 Z: 359.93
+Coords X: 25.06 Y: -3.5 Z: -24.45
+ Camera Direction X: 5.83 Y: 153.22 Z: 4.44
+Coords X: 27.74 Y: -3.5 Z: -29.81
+ Camera Direction X: 4.97 Y: 191.24 Z: 2.37
+Coords X: 27.65 Y: -3.5 Z: -42.76
+ Camera Direction X: 4.96 Y: 200.71 Z: 3.61
+Coords X: 24.35 Y: -3.5 Z: -47.76
+ Camera Direction X: 2.36 Y: 250.56 Z: 1.41

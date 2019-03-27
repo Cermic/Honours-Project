@@ -1,0 +1,20 @@
+Light Configuration TEN test conducted on: 26/02/2019 @ 16:25.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 7.03 Y: 180.89 Z: 357.98
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 359.1 Y: 212.55 Z: 0.21
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 352.6 Y: 236.33 Z: 357.97
+Coords X: -18.4 Y: 3.25 Z: -20.6
+ Camera Direction X: 358.21 Y: 237.43 Z: 357.66
+Coords X: -20.5 Y: 3.52 Z: -21.8
+ Camera Direction X: 359.08 Y: 237.87 Z: 358.6
+Coords X: -25.06 Y: 3.5 Z: -24.45
+ Camera Direction X: 350.37 Y: 206.19 Z: 1.67
+Coords X: -27.74 Y: 3.5 Z: -29.81
+ Camera Direction X: 359.04 Y: 178.72 Z: 0.02
+Coords X: -27.65 Y: 3.5 Z: -42.76
+ Camera Direction X: 1.12 Y: 204.92 Z: 356.98
+Coords X: -30.95 Y: 3.5 Z: -47.76
+ Camera Direction X: 3.2 Y: 231.98 Z: 356.68

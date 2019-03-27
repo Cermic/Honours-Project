@@ -1,0 +1,22 @@
+Light Configuration SEVEN test conducted on: 26/02/2019 @ 13:11.
+Author: Jack D Smith
+Coords X: 0 Y: 0.5 Z: -1.02
+ Camera Direction X: 11.63 Y: 177.72 Z: 0.93
+Coords X: 0 Y: 0 Z: -7
+ Camera Direction X: 3.1 Y: 210.94 Z: 0.13
+Coords X: -3.3 Y: 0 Z: -12
+ Camera Direction X: 354.87 Y: 234.4 Z: 2.87
+Coords X: -11.45 Y: 0.8 Z: -16.65
+ Camera Direction X: 347.43 Y: 235.34 Z: 2.65
+Coords X: -18.4 Y: 3.25 Z: -20.6
+ Camera Direction X: 7.91 Y: 235.23 Z: 2.16
+Coords X: -20.5 Y: 3.52 Z: -21.8
+ Camera Direction X: 6.33 Y: 238.38 Z: 2.69
+Coords X: -25.06 Y: 3.5 Z: -24.45
+ Camera Direction X: 0.63 Y: 267.93 Z: 2.96
+Coords X: -31.04 Y: 3.5 Z: -24.09
+ Camera Direction X: 358.82 Y: 295.63 Z: 3.87
+Coords X: -42.22 Y: 3.5 Z: -17.54
+ Camera Direction X: 1.72 Y: 335.79 Z: 2.76
+Coords X: -44.9 Y: 3.5 Z: -12.18
+ Camera Direction X: 3.23 Y: 0.86 Z: 354.54
