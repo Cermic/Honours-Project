@@ -84,7 +84,6 @@ public class Room : MonoBehaviour
             wayPoints[7].transform.localRotation = Quaternion.Euler(103f, -115f, -130f);
             wayPoints[8].transform.localPosition = new Vector3(1.77f, 2.03f, -0.305f);
             wayPoints[8].transform.localRotation = Quaternion.Euler(103f, -115f, -130f);
-            // wayPoints[8].transform.localRotation = Quaternion.Euler(120.4f, -90f, -107f);
             foreach (GameObject wayP in wayPoints)
             {
                 wayP.transform.localScale = new Vector3(0.15f, 0.05f, 0.15f);

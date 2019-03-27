@@ -28,10 +28,10 @@ public class RoomSetup : MonoBehaviour {
     private LightProperties lightProp;
     Object firstRoomObject, roomObject, endRoomObject;
 
-    private List<float> colourValues;
+    private List<float> roomLightValues;
     private List<int> chainValues;
     private int[] roomCombination;
-    private List<Vector3> colourValues2;
+    private List<Vector3> roomLightValues2;
     private Vector3 firstRoomColour;
     private int endIndex;
     private int startIndex;
@@ -76,12 +76,12 @@ public class RoomSetup : MonoBehaviour {
         roomSet = new Room[mazeSize];
 
         // Read in colour values from config file
-        colourValues = new List<float>();
+        roomLightValues = new List<float>();
         chainValues = new List<int>();
         string configText = File.ReadAllText("LightConfig.txt");
-        colourValues = ReadConfig(configText, colourValues);
+        roomLightValues = ReadConfig(configText, roomLightValues);
         // Sets the number of configurations based on the amount read from external file.
-        lightConfigs = LightConfigs(colourValues);
+        lightConfigs = LightConfigs(roomLightValues);
         // A collection of all possible Light Configurations
         LightConfig[] lc = new LightConfig[lightConfigs];
 
@@ -90,11 +90,11 @@ public class RoomSetup : MonoBehaviour {
         LightConfig[] mazeConfig = new LightConfig[MAZE_DEPTH - 1];
         roomCombination = new int[MAZE_DEPTH - 1];
 
+        // Determines the configuration chain based on the current light configuration
         ReadConfigChain(currentConfigs, chainValues);
-
         // Process all configs and setup an array of LightConfigs.
-        ProcessConfig(colourValues, lc);
-        // Set colours of the first room lights
+        ProcessConfig(roomLightValues, lc);
+        // Set properties of the room lights
         SetupLights(lightconfig);
         LightConfig[] roomArray = new LightConfig[roomSet.Length];
 
@@ -170,8 +170,6 @@ public class RoomSetup : MonoBehaviour {
                     roomProp.tag = "ROOM";
                     roomProp.scale = new Vector3(1, 1, 1);
                 }
-                
-                
                 roomProp.parentTransform = roomSet[parentRoomIndex].gameObj.transform;
                 // Set light properties for the current room.
                 lightProp.lightConfig = roomArray[j];
@@ -189,7 +187,7 @@ public class RoomSetup : MonoBehaviour {
                 }
                 else
                 {
-                    // Child rooms of the first two ---
+                    // Final Child Rooms
                     if (j % 2 == 0) // If the index is even, the room is on the left
                     {
                         if (roomProp.tag == "END ROOM")
@@ -227,7 +225,7 @@ public class RoomSetup : MonoBehaviour {
         }
     }
     // Reads the Config file that governs light configurations
-    List<float> ReadConfig(string configText, List<float> colourValues)
+    List<float> ReadConfig(string configText, List<float> roomLightValues)
     {
         char[] seperators = {'C', 'I', ',', '<','>', '|'};		
         string[] strValues = configText.Split(seperators);
@@ -238,13 +236,13 @@ public class RoomSetup : MonoBehaviour {
             float value = 0.0f;
             if (float.TryParse(str, out value))
             {
-                colourValues.Add(value);
+                roomLightValues.Add(value);
              }
             i++;
         }
-        return colourValues;
+        return roomLightValues;
     }
-    // Reads the Config file that governs light configurations
+    // Reads the Config file that governs light combinations
     List<int> ReadConfigChain(string configText, List<int> configChain)
     {
         char[] seperators = {'C'};
@@ -260,27 +258,27 @@ public class RoomSetup : MonoBehaviour {
         }
         return configChain;
     }
-    int LightConfigs(List<float> colourValues)
+    int LightConfigs(List<float> roomLightValues)
     {
-        return colourValues.Count / 8;
+        return roomLightValues.Count / 8;
     }
-    void ProcessConfig(List<float> colourValues, LightConfig[] lc)
+    void ProcessConfig(List<float> roomLightValues, LightConfig[] lc)
     {
         int offset = 8;
         for (int i = 0; i < lc.Length; i++)
         {
             // Left Light rgb values
-            lc[i].leftLightColour.x = colourValues[i * offset];
-            lc[i].leftLightColour.y = colourValues[i * offset + 1];
-            lc[i].leftLightColour.z = colourValues[i * offset + 2];
+            lc[i].leftLightColour.x = roomLightValues[i * offset];
+            lc[i].leftLightColour.y = roomLightValues[i * offset + 1];
+            lc[i].leftLightColour.z = roomLightValues[i * offset + 2];
             // Right light rgb values
-            lc[i].rightLightColour.x = colourValues[i * offset + 3];
-            lc[i].rightLightColour.y = colourValues[i * offset + 4];
-            lc[i].rightLightColour.z = colourValues[i * offset + 5];
+            lc[i].rightLightColour.x = roomLightValues[i * offset + 3];
+            lc[i].rightLightColour.y = roomLightValues[i * offset + 4];
+            lc[i].rightLightColour.z = roomLightValues[i * offset + 5];
             // Left light intensity
-            lc[i].leftLightIntensity = colourValues[i * offset + 6];
+            lc[i].leftLightIntensity = roomLightValues[i * offset + 6];
             // Right light intensity
-            lc[i].rightLightIntensity = colourValues[i * offset + 7];
+            lc[i].rightLightIntensity = roomLightValues[i * offset + 7];
         }
 
     }
